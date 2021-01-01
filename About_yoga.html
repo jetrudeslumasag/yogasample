@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title >About Yoga</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	
+<style>
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 40px 5px 40px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #3e8e41;
+}
+
+#myInput {
+  box-sizing: border-box;
+  background-position: 2px 2px;
+  background-repeat: no-repeat;
+  font-size: 25px;
+  padding: 10px 20px 10px 20px;
+  border-radius: 12px;
+  
+}
+
+#myInput:focus {outline: 2px solid #ddd;}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  text-align:center;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color:#ddd ;
+  min-width: 105px;
+  overflow: auto;
+  z-index: 1;
+  border-radius:5px;
+ 
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 6px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #3e8e41;}
+
+.show {display: block;}
+</style>	
+
+<style>
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 10px;
+  z-index: 99;
+  font-size: 20px;
+  background-color: #3e8e41;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
+
+</style>
+
+
+<style>
+.collapsible {
+  background-color: #555;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  width: 20%;
+  font-size: 14px;
+  text-align:center;
+}
+
+.active, .collapsible:hover {
+  background-color: #3e8e41;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+ 
+}
+</style>
+
+<style>	
+body {
+  padding: 25px;
+  background-color: white;
+  color: black;
+ 
+}
+
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+</style>	
+	<button onclick="Function()" id="dark-mode"><i style="font-size:24px" class="fa">&#xf011;</i> </button>
+
+<script>
+function Function() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
+</script>
+
+</head>
+
+<body>
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+<script>
+//Get the button
+var mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
+
+<div class="dropdown">
+  
+<button onclick="myFunction()" class="dropbtn"><i style="font-size:24px" class="fa">&#xf0c9;</i></button>
+  <div id="myDropdown" class="dropdown-content">
+   <a href="index.html">Home</a>
+   <a href="About_yoga.html">About Yoga</a></a>
+   <a href="start.html">Start</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</div>
+
+<div id="section">
+<!-- begin -->
+<canvas id="canvas" width="170" height="170" style="background-color:#1F285D; border-radius:50%; float:right"></canvas>
+<script>
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var radius = canvas.height / 2;
+ctx.translate(radius, radius);
+radius = radius * 0.90
+setInterval(drawClock, 1000);
+
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
+}
+
+function drawFace(ctx, radius) {
+  var grad;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, 2*Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+  grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+  grad.addColorStop(0, '#333');
+  grad.addColorStop(0.5, 'white');
+  grad.addColorStop(1, '#333');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = radius*0.1;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+  ctx.fillStyle = '#333';
+  ctx.fill();
+}
+
+function drawNumbers(ctx, radius) {
+  var ang;
+  var num;
+  ctx.font = radius*0.15 + "px arial";
+  ctx.textBaseline="middle";
+  ctx.textAlign="center";
+  for(num = 1; num < 13; num++){
+    ang = num * Math.PI / 6;
+    ctx.rotate(ang);
+    ctx.translate(0, -radius*0.85);
+    ctx.rotate(-ang);
+    ctx.fillText(num.toString(), 0, 0);
+    ctx.rotate(ang);
+    ctx.translate(0, radius*0.85);
+    ctx.rotate(-ang);
+  }
+}
+
+function drawTime(ctx, radius){
+    var now = new Date();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    //hour
+    hour=hour%12;
+    hour=(hour*Math.PI/6)+
+    (minute*Math.PI/(6*60))+
+    (second*Math.PI/(360*60));
+    drawHand(ctx, hour, radius*0.5, radius*0.07);
+    //minute
+    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+    drawHand(ctx, minute, radius*0.8, radius*0.07);
+    // second
+    second=(second*Math.PI/30);
+    drawHand(ctx, second, radius*0.9, radius*0.02);
+}
+
+function drawHand(ctx, pos, length, width) {
+    ctx.beginPath();
+    ctx.lineWidth = width;
+    ctx.lineCap = "round";
+    ctx.moveTo(0,0);
+    ctx.rotate(pos);
+    ctx.lineTo(0, -length);
+    ctx.stroke();
+    ctx.rotate(-pos);
+}
+</script>
+</div>
+<!-- end -->
+
+<script>
+
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+</script>
+	<div class="section">
+			<ul><ul><ul><ul><UL><ul><ul><UL><ul>
+	<img src="images/y.gif"/>
+	</div>
+	</div>
+	
+	<div id="content">
+		<div>
+			<button type="button" class="collapsible">YOGA HISTORY</button>
+			<div class="content">
+			<p>&emsp; &emsp;Most of us know yoga as a set of poses performed in a gym or yoga studio setting. The majority of
+yoga styles practiced today were invented in the last quarter of the 20th century and are either a far
+cry from yoga’s roots or have no authentic lineage.
+If we really want to examine the roots of yoga, we need to go back to the Harrapan culture, dating
+back 3,500 years, when yoga was a meditative practice. According to some, around 1500 BCE,
+Harrapan culture was diminished due to Aryan invasion. Barbarians from Normandy introduced the
+caste system and enforced a set of religious rituals that involved blood sacrifice practices. Along
+with these religious practices came sacred scriptures called the Vedas, a large body of spiritual texts
+originating in India.
+<br><br>
+&emsp; &emsp;The word “yoga” was first mentioned in the oldest of the Vedas, Rig Veda. It
+referred to the concept of discipline.
+Fast forward to 800 BCE. The Upanishads, a collection of texts that contain some of the earliest
+concepts of Hinduism, prescribed the method of achieving enlightenment by studying under a teacher
+and dedicating one’s life to a yoga practice.
+<br>
+The Upanishads outlined two paths to enlightenment:
+Karma Yoga (selfless dedication to the service of others) and Jnana Yoga (intense study of spiritual
+writings). Around the 3rd century BCE, the Maitrayaniya Upanishad prescribed a six-step process to
+enlightenment, which included mastering pranayama (breath control), pratyaharia (sense
+withdrawal), dhyana (meditation), dharana (one-pointed concentration), tarka (self-reflection), and
+samadhi (absolute absorption) in order to unite the Atman (individual’s spirit) and Brahman
+(universal spirit or source of creation). The sacred syllable om appeared in this particular Upanishad
+as a symbol of union between mind and breath.
+<br>
+<br>
+&emsp; &emsp;At around the same time that Maitrayaniya Upanishad was introduced, Bhagavad Gita gained
+prominence. This scripture combined and mythological tales that later made their way into a
+celebrated collection of tales, Mahabharata. Three methods of devotion were outlined inBhagavad
+Gita: Karma Yoga, Jnana Yoga, and Bhakti Yoga (devotion).
+Compiled around 400 CE by Patanjali, The Yoga Sutras introduced the eight-fold path to yoga
+practice, which is considered to be the classical yoga manual and the foundation of many of today’s
+yoga practices, particularly Ashtanga Yoga. We will hear more about this eight-fold path in The Eight
+Limbs of Yoga (here), which include yama (self-restraint) niyama (self-purification by self-restraint
+and discipline), asana (seat or posture), pranayama (control of breath), pratyahara (sense
+withdrawal), dharana (one-pointed concentration), dhyana (meditation), and samadhi (total
+absorption).
+<br>
+<br>
+&emsp; &emsp;Around the 4th century CE, Tantra Yoga emerged. This new form of yoga celebrated the physical body
+as a vehicle to enlightenment. The philosophy behind Tantra Yoga can be summarized by the idea of
+uniting all the dualities within a human body (e.g., male and female; good and evil), which gave
+Tantra a very sexual reputation. This is, however, a common misunderstanding, since Tantra practices
+extend far beyond sexuality.
+<br>
+Hatha Yoga was introduced in the 10th century CE. It combined the physicality and conscious intent of
+using bodily postures, or asana practice, and pranayama breath control for the goal of selfrealization.
+In 14th century CE, the Yoga Upanishads were introduced. One of these sacred texts, Tejo Bindu
+Upanishad, added seven more important parts of yoga practice on top of Patanjali’s eight. They were
+as follows: mula bandha (root lock), balance, undisturbed vision, tyaga (abandonment), mauua
+(quiet), desha (space), and kala (time).
+<br>
+<br>
+&emsp; &emsp;It was not until the 20th century that yoga gained any kind of popularity in Western Europe and North
+America. Swami Sivananda Saraswati was one of the first yogis to travel outside of India to spread
+the teachings of yoga to the West. He established yoga centers in North America at the time Swami
+Satchidananda also delivered an opening speech at the Woodstock Festival in 1969. However, T.
+Krishnamacharya is arguably the father of the yoga practice with which Westerners are familiar
+today. In the 1930s, he began teaching his students the Mysore vigorous sequences of yoga poses that
+emphasize strength and athletic ability. Students were only allowed to learn the next and more
+challenging pose after they had grasped the previous one. His three most prominent and influential
+students are Pattabhi Jois, Iyengar, and Indra Devi.
+<br>
+<br>
+&emsp; &emsp;Pattabhi Jois established Ashtanga yoga. It is one
+of the most popular types of yoga practiced in the West. Iyengar became successful by creating his
+own sequences of yoga poses, which were characterized by a focus on the alignment of the body and
+the use of various props. Indra Devi is considered the first famous yogini (female yoga master).
+Krishnamacharya also educated his son Desikachar in yoga. An engineer by training, Desikachar saw
+great value in studying yoga only when he was already a college graduate. Desikachar developed
+Vinyoga, which is a more therapeutic and less intense approach to physical practice, as compared to
+Ashtanga.
+<br> <br>
+&emsp; &emsp;The 21st century presents us with an endless variety of yoga “styles” or “brands,” such as Bikram
+Yoga, Power Yoga, Kundalini Yoga, and countless more. It is important to be open-minded, try as
+many styles and approaches as possible, and figure out what gives you the best results in terms of
+achieving both your physical and spiritual goals. There is no wrong way to achieve self-realization.
+Just make sure you are mindful, patient, practical, and consistent in your practice.</p>
+<br>
+</div>
+
+<div>
+<button type="button" class="collapsible">WHEN TO PRACTICE</button>
+<div class="content">
+	<p1>&emsp; &emsp;Put aside a specific time in your day to enjoy your Yoga practice. Dawn and dusk are
+considered the best times of the day to practice Yoga, as the rising and setting of the sun
+charge our body with special energy. However, if these times are impossible for you, find
+another time of the day that works best for you and practice consistently.
+Practice in the morning if you want to prepare your mind and body for the day, and
+charge your body with positive energy. Keep in mind that in the morning or in cold weather
+your muscles will be stiffer, so ease carefully into the postures at first.
+Practice in the evening if you want to relax after a stressful day, unwind and centre. In the
+evenings your body will be more flexible, so you'll be able to go deeper into postures.</p1>	
+</div>
+</div>
+					
+<div>
+<button type="button" class="collapsible">WHERE TO PRACTICE</button>
+			<div class="content">
+	<p2> &emsp; &emsp;	Find a place where you are least likely to be disturbed. It can be your room, garden or
+beach - indoors or outdoors, wherever there is an even, flat surface.
+If you are practicing indoors, make sure that the room is ventilated and with comfortable
+temperature. Air conditioned rooms are not advisable - when the environment is cold your
+body is stiff, and muscles stretch slowly. A clean environment and fresh air adds additional
+benefits to the breathing practice.
+Make sure that you have enough space to allow you to move around, and extend the
+arms and legs freely. Turn your phone off and hang a note on your door to say that you
+are having time to yourself. This is YOUR time.</p2>	
+</div>
+</div>
+					
+<div>
+	<button type="button" class="collapsible">EATING AND DRINKING</button>
+		<div class="content">
+	<p2>&emsp; &emsp;Never practice directly after eating. Yoga should be done on empty stomach.
+Therefore allow at least 1 hour after a snack and 2 - 3 hours after a heavy meal before
+you begin your practice.
+It is best to drink before or after your Yoga session, to avoid becoming dehydrated. Try to
+avoid drinking water during the practice, to avoid losing your concentration on Yoga
+postures and breathing.
+However if you are practicing in the morning, have at least a glass of warm water before
+your practice, or a light snack (fruit or yoghurt). When you finish your practice eat a
+proper breakfast.</p2>	
+</div>
+</div>
+					
+<div>
+<button type="button" class="collapsible">WHAT TO WEAR</button>
+		<div class="content">
+	<p2>&emsp; &emsp;Wear comfortable, light, loose clothing, preferably made of natural fibers. Your clothes
+should not restrict your movements. Remove your jewelry, watch and spectacles if
+possible.
+Yoga is practiced with bare feet. </p2>	
+</div>
+</div>
+					
+<div>
+<button type="button" class="collapsible">WHAT YOU NEED</button>
+	<div class="content">
+	<p2>&emsp; &emsp;Get a special Yoga mat for yourself. It provides padding as well as a non-slip surface to
+practice on, and makes your practice easier and safer. You can find one in any sports
+shop.
+No one else should use your mat. This is not only for hygiene reasons, but also because
+you will eventually build up energy on your mat that will support you throughout the Yoga
+practice.
+You can also get a cushion to make your meditation more comfortable and a blanket if
+you wish to cover yourself while relaxing in the Corpse Pose at the end of the session.
+If you want, you can play relaxing, soothing music in the background - just make sure itʼs
+not too loud. </p2>	
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+
+		
+	<div id="footer">
+	</div>
+	
+ <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">Widget</a> is loading comments...</div>
+ <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
+ <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%24Zs3oIg9XfnAYpmLky5W5z."+"&opts=16862&num=10&ts=1607768900753");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Home Yoga</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<style>
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 40px 5px 40px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #3e8e41;
+}
+
+#myInput {
+  box-sizing: border-box;
+  background-position: 2px 2px;
+  background-repeat: no-repeat;
+  font-size: 25px;
+  padding: 10px 20px 10px 20px;
+  border-radius: 12px;
+  
+}
+
+#myInput:focus {outline: 2px solid #ddd;}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  text-align:center;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color:#ddd ;
+  min-width: 105px;
+  overflow: auto;
+  z-index: 1;
+  border-radius:5px;
+ 
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 6px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #3e8e41;}
+
+.show {display: block;}
+</style>	
+
+<style>
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 50px;
+  right: 25px;
+  z-index: 99;
+  font-size: 15px;
+  background-color: #3e8e41;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
+
+</style>
+
+<style>
+#more {display: none;}
+</style>
+
+<style>	
+body {
+  padding: 25px;
+  background-color: white;
+  color: black;
+ 
+}
+
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+</style>	
+	<button onclick="Function()" id="dark-mode"><i style="font-size:24px" class="fa">&#xf011;</i> </button>
+
+<script>
+function Function() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
+</script>
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+}
+
+.container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.container img {vertical-align: middle;}
+
+.container .content {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+</style>
+
+
+
+
+</head>
+
+
+<body>
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+<script>
+
+var mybutton = document.getElementById("myBtn");
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
+<div class="dropdown">
+
+<button onclick="myFunction()" class="dropbtn"><i style="font-size:24px" class="fa">&#xf0c9;</i></button>
+  <div id="myDropdown" class="dropdown-content">
+	<a href="About_yoga.html">About Yoga</a>
+   <a href="start.html">Start</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</div>
+
+<div id="section">
+		
+<!-- begin -->
+<canvas id="canvas" width="170" height="170" style="background-color:#1F285D; border-radius:50%; float:right"></canvas>
+<script>
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var radius = canvas.height / 2;
+ctx.translate(radius, radius);
+radius = radius * 0.90
+setInterval(drawClock, 1000);
+
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
+}
+
+function drawFace(ctx, radius) {
+  var grad;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, 2*Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+  grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+  grad.addColorStop(0, '#333');
+  grad.addColorStop(0.5, 'white');
+  grad.addColorStop(1, '#333');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = radius*0.1;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+  ctx.fillStyle = '#333';
+  ctx.fill();
+}
+
+function drawNumbers(ctx, radius) {
+  var ang;
+  var num;
+  ctx.font = radius*0.15 + "px arial";
+  ctx.textBaseline="middle";
+  ctx.textAlign="center";
+  for(num = 1; num < 13; num++){
+    ang = num * Math.PI / 6;
+    ctx.rotate(ang);
+    ctx.translate(0, -radius*0.85);
+    ctx.rotate(-ang);
+    ctx.fillText(num.toString(), 0, 0);
+    ctx.rotate(ang);
+    ctx.translate(0, radius*0.85);
+    ctx.rotate(-ang);
+  }
+}
+
+function drawTime(ctx, radius){
+    var now = new Date();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    //hour
+    hour=hour%12;
+    hour=(hour*Math.PI/6)+
+    (minute*Math.PI/(6*60))+
+    (second*Math.PI/(360*60));
+    drawHand(ctx, hour, radius*0.5, radius*0.07);
+    //minute
+    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+    drawHand(ctx, minute, radius*0.8, radius*0.07);
+    // second
+    second=(second*Math.PI/30);
+    drawHand(ctx, second, radius*0.9, radius*0.02);
+}
+
+function drawHand(ctx, pos, length, width) {
+    ctx.beginPath();
+    ctx.lineWidth = width;
+    ctx.lineCap = "round";
+    ctx.moveTo(0,0);
+    ctx.rotate(pos);
+    ctx.lineTo(0, -length);
+    ctx.stroke();
+    ctx.rotate(-pos);
+}
+</script>
+</div>
+<!-- end -->
+
+
+
+
+<script>
+
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+</script>
+
+	
+	<div class="section">
+			
+		<div id="home">
+		<ul><ul><ul><ul><ul><UL>
+			<div class="section">
+				<img src="images/tenor.gif" /></div>
+				<div class="container">
+				</ul></ul></ul></ul></ul></UL>
+				
+			<div class="container">
+  <img src="images/y.gif" alt="y.gif" style="width:100%;">
+  <div class="content">
+    <h1>WELCOME TO YOGA FITNESS</h1>
+    <h2 style="font-family:verdana; font-size:30px">"Inhale the FUTURE, exhale the PAST."</h2>
+  </div>
+</div>
+</div>
+</div>
+</div>
+	
+	<div id="content">
+	<div>
+		<h2> (MODULE 1) STRETCH</h2>
+		<p>&emsp; &emsp;Yoga poses (also called Asanas) are physical postures that exercise your entire body, stretch and tone
+the muscles and joints, the spine<span id="dots">...</span><span id="more"> and entire skeletal system. They have a beneficial effect not only on the
+body frame, but also on the internal organs, glands and nerves, keeping all systems healthy. Asanas
+reduce stress, enhance relaxation and revitalize body, mind and spirit.
+In this book I'll guide you through the most important postures from traditional Hatha Yoga that aid
+in enhancing weight loss. All of these Asanas are included in the [video series title] and this book
+should be a reference guide for you, whenever you want to better understand or deepen your knowledge
+on specific postures.
+<br><br>
+Stretch! An Illustrated Step-By-Step Guide To 90 Slimming Yoga Postures includes:
+<br>
+❖ A Short Guide For A Successful Yoga Practice - this guide answers a variety of common questions,
+such as where and when to practice, what to wear and how to practice for optimal results.
+<br>
+❖ Detailed descriptions of 90 Slimming Yoga Poses with over 170 pictures.
+<br>
+❖ Every pose is illustrated with professional pictures and includes step-by-step instructions on how to
+assume the pose as well as its benefits and precautions.</span></p>
+<button onclick="myfunc()" id="myBttn">Read more</button>
+
+<script>
+function myfunc() {
+  var dots = document.getElementById("dots");
+  var moreText = document.getElementById("more");
+  var btnText = document.getElementById("myBttn");
+
+  if (dots.style.display === "none") {
+    dots.style.display = "inline";
+    btnText.innerHTML = "Read more"; 
+    moreText.style.display = "none";
+  } else {
+    dots.style.display = "none";
+    btnText.innerHTML = "Read less"; 
+    moreText.style.display = "inline";
+  }
+}
+</script>
+
+
+<br>					
+<div>
+<h2>BEFORE YOU START</h2>
+	<p2>&emsp; &emsp;If you have a medical condition you should consult your medical or health specialist
+before embarking on this Slimming Yoga program. It also applies to pregnant women
+and children below 12 years old.
+The information provided within this content is believed to be accurate based on the personal
+experience of the authors but the reader is responsible for consulting with their own health
+professional before changing the diet or starting an exercise program; it is not a substitute
+for proper medical advice.
+If in doubt, please consult your doctor or licensed medical practitioner. The developer is not
+responsible or liable for any diagnosis made by a user based on the content of this website.
+</p2>	
+</div>
+</div>
+</div>
+</div>
+</div>
+	
+	<div id="footer"> </div>
+	
+	
+<!-- begin wwww.htmlcommentbox.com -->
+ <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">HTML Comment Box</a> is loading comments...</div>
+ <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
+ <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%24ZV8GA3NwrNccL5wyMiNL21"+"&opts=16862&num=10&ts=1609046705210");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+<!-- end www.htmlcommentbox.com -->
+
+</body>
+</html>
